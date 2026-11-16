@@ -58,3 +58,12 @@ Baza taboru jest zapisana w pliku tekstowym/CSV z separatorem w postaci średnik
 1. **Nie wpisuj wartości `PsiA` dla klasycznego taboru:** Parametr `PsiA` jest przeznaczony **wyłącznie dla nowoczesnych pojazdów trakcyjnych z napędem asynchronicznym**. Dla parowozów, klasycznych lokomotyw spalinowych/elektrycznych oraz starszych EZT (np. EU07, EN57) pole to musi pozostać puste (należy jednak zachować średnik `;` na końcu wiersza).
 2. **Używaj kropki (`.`) w ułamkach:** Wartości dziesiętne zapisuj z kropką, np. `78.2`.
 3. **Zachowuj komplet średników:** Nawet jeśli pojazd nie korzysta z danej kolumny mocy, nie usuwaj rozdzielających ją średników.
+## Źródła danych taborowych / Rolling Stock Data Sources
+
+**PL:**
+Aktualne dane techniczne oraz parametry trakcyjne współczesnych pojazdów zarejestrowanych na sieci kolejowej w Polsce (niezbędne do uzupełnienia bazy taboru) znajdują się w **Załączniku nr 13** (*Wykaz zarejestrowanych pojazdów trakcyjnych w aplikacji ISZTP i SKRJ – Obliczenia trakcyjne*) do Regulaminu sieci PKP Polskie Linie Kolejowe S.A.:
+👉 [Regulamin sieci PKP PLK S.A. – Załącznik nr 13 (XLSX)](https://plk-sa.pl)
+
+**EN:**
+Up-to-date technical data and traction parameters for modern traction units registered on the Polish railway network (to be used when expanding the rolling stock database) can be found in **Annex 13** (*List of registered traction units in the ISZTP and SKRJ application – Traction Assessment*) to the PKP Polskie Linie Kolejowe S.A. Network Statement:
+👉 [PKP PLK S.A. Network Statement – Annex 13 (XLSX)](https://plk-sa.pl)
