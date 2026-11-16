@@ -60,10 +60,13 @@ Baza taboru jest zapisana w pliku tekstowym/CSV z separatorem w postaci średnik
 3. **Zachowuj komplet średników:** Nawet jeśli pojazd nie korzysta z danej kolumny mocy, nie usuwaj rozdzielających ją średników.
 ## Źródła danych taborowych / Rolling Stock Data Sources
 
+## Źródła danych taborowych / Rolling Stock Data Sources
+
 **PL:**
-Aktualne dane techniczne oraz parametry trakcyjne współczesnych pojazdów zarejestrowanych na sieci kolejowej w Polsce (niezbędne do uzupełnienia bazy taboru) znajdują się w **Załączniku nr 13** (*Wykaz zarejestrowanych pojazdów trakcyjnych w aplikacji ISZTP i SKRJ – Obliczenia trakcyjne*) do Regulaminu sieci PKP Polskie Linie Kolejowe S.A.:
-👉 [Regulamin sieci PKP PLK S.A. – Załącznik nr 13 (XLSX)](https://plk-sa.pl)
+Aktualne dane techniczne oraz parametry trakcyjne współczesnych pojazdów zarejestrowanych na sieci kolejowej w Polsce (niezbędne do uzupełnienia bazy taboru) znajdują się w **Załączniku nr 13** (*Wykaz zarejestrowanych pojazdów trakcyjnych w aplikacji ISZTP i SKRJ – Obliczenia trakcyjne*) do aktualnego Regulaminu sieci PKP Polskie Linie Kolejowe S.A.:
+👉 [Regulamin sieci PKP PLK S.A. – Załącznik nr 13 (XLSX)](https://www.plk-sa.pl/klienci-i-kontrahenci/warunki-udostepniania-infrastruktury-i-regulaminy/regulamin-sieci/)
 
 **EN:**
-Up-to-date technical data and traction parameters for modern traction units registered on the Polish railway network (to be used when expanding the rolling stock database) can be found in **Annex 13** (*List of registered traction units in the ISZTP and SKRJ application – Traction Assessment*) to the PKP Polskie Linie Kolejowe S.A. Network Statement:
-👉 [PKP PLK S.A. Network Statement – Annex 13 (XLSX)](https://plk-sa.pl)
+Up-to-date technical data and traction parameters for modern traction units registered on the Polish railway network (to be used when expanding the rolling stock database) can be found in **Annex 13** (*List of registered traction units in the ISZTP and SKRJ application – Traction Assessment*) to the current PKP Polskie Linie Kolejowe S.A. Network Statement:
+👉 [PKP PLK S.A. Network Statement – Annex 13 (XLSX)](https://www.plk-sa.pl/klienci-i-kontrahenci/warunki-udostepniania-infrastruktury-i-regulaminy/regulamin-sieci/)
+
