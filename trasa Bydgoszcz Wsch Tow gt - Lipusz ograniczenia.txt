@@ -1,0 +1,12 @@
+# Punkt;Km;Vmax_kmh;Pochylenie_promile;Postoj;Kod
+Bydgoszcz Wschód Tow.;21.250;80;;TAK;BRAK
+Bydgoszcz Leśna (POGP);24.178;80;3.2;NIE;BRAK
+Maksymilianowo (ST);33.472;80;6.1;NIE;BRAK
+Początek ograniczenia;40.000;80;;NIE;BRAK
+Koniec ograniczenia 30 km/h;40.050;30;;NIE;BRAK
+Serock (ST);50.306;80;4.6;NIE;BRAK
+Wierzchucin (ST);71.349;80;4.5;NIE;BRAK
+Lipowa Tucholska (ST);94.370;80;3.7;NIE;BRAK
+Bąk (ST);116.699;80;4.1;NIE;BRAK
+Kościerzyna (ST - zmiana linii 201/211);137.322;80;5.1;NIE;ZMIANA_LINII
+Lipusz (ST - linia 211);154.030;80;9.1;TAK;BRAK

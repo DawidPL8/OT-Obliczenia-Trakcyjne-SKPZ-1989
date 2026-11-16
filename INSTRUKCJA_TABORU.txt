@@ -1,0 +1,112 @@
+================================================================================
+  INSTRUKCJA EDYCJI BAZY TABORU (tabor.txt) W PROGRAMIE OTSKPZ1989
+  (Obliczenia Trakcyjne PKP / SKPZ do 1989 r.)
+================================================================================
+
+1. STRUKTURA PLIKU tabor.txt
+--------------------------------------------------------------------------------
+Plik tabor.txt to zwykły plik tekstowy (kodowanie UTF-8), w którym każdy wiersz
+opisuje jeden pojazd trakcyjny (lokomotywę lub zespół trakcyjny).
+Wiersze zaczynające się od znaku # są komentarzami i program je pomija.
+
+Poszczególne kolumny oddziela się średnikiem (;).
+Każdy wiersz zawiera 16 kolumn obowiązkowych (15 średników) oraz 1 opcjonalną
+kolumnę na samym końcu (16. średnik):
+
+Seria;Typ;Opory;STA;P_Parowa;P_Spalinowa;P_3kV;P_25kV;Masa_Prozny_t;Masa_Ladowny_t;Tender_t;Dlugosc_m;L_osi;N_napednych;Vmax_kmh;PsiA;Rodzina_TW
+
+
+2. SZCZEGÓŁOWY OPIS WSZYSTKICH 17 KOLUMN
+--------------------------------------------------------------------------------
+1) Seria          - Oznaczenie serii pojazdu wyświetlane na liście w programie
+                    (np. ST44, EU07, Ty2, EN57, SA133).
+2) Typ            - Rodzaj pojazdu (wpisujemy dokładnie jedno ze słów):
+                    LOK = lokomotywa (ciągnie wagony lub jedzie luzem),
+                    ZT  = zespół trakcyjny lub wagon motorowy (EZT / SZT).
+3) Opory          - Profil oporów ruchu pojazdu:
+                    Dla LOK: E (elektryczna), S (spalinowa), P (parowa).
+                    Dla ZT : Klasyczne (starsze EZT/SZT, np. EN57, EW58),
+                             Nowoczesne (współczesne EZT/SZT, np. SA133, Impuls),
+                             HS (dużych prędkości, np. ED250 Pendolino),
+                             HS+ (ultranowoczesne niskooporowe).
+4) STA            - Zabezpieczenie / charakterystyka przyczepności:
+                    N = klasyczny pojazd bez mikroprocesorowego poślizgu,
+                    T = nowoczesny pojazd z zaawansowaną kontrolą przyczepności,
+                    P = parowóz (używa klasycznej charakterystyki przyczepności
+                        parowozu zależnej od prędkości).
+5) P_Parowa       - Moc ciągła/znamionowa na haku/obwodzie w [kW] dla trakcji
+                    parowej (jeśli pojazd nie jest parowozem, zostawiamy puste).
+6) P_Spalinowa    - Moc ciągła w [kW] dla trakcji spalinowej (puste, jeśli brak).
+7) P_3kV          - Moc ciągła w [kW] dla sieci 3 kV DC (puste, jeśli brak).
+8) P_25kV         - Moc ciągła w [kW] dla sieci 25 kV AC (puste, jeśli brak).
+                    UWAGA: Jeśli pojazd jest dwusystemowy lub hybrydowy (np.
+                    spalinowo-elektryczny), wpisujemy moce w obu kolumnach!
+9) Masa_Prozny_t  - Masa służbowa pojazdu próżnego w tonach [t].
+                    Dla LOK jest to masa służbowa lokomotywy (bez tendra).
+                    Dla ZT program używa tej masy przy pociągach służbowych
+                    próżnych (np. RJ, CJ, NJ, SDJ, SPJ, SJ, LJ, RM, CM, LM).
+10) Masa_Ladowny_t- Masa pojazdu z kompletem pasażerów w tonach [t].
+                    Dla LOK wpisujemy tę samą wartość co w Masa_Prozny_t.
+                    Dla ZT program używa tej masy dla pociągów pasażerskich
+                    (EJ, PJ, DJ, MJ, EM, PM, DM, MM, OM, TOM) oraz pracowniczych
+                    (WJ, WM).
+11) Tender_t      - Masa służbowa tendra w tonach [t] (dotyczy tylko parowozów
+                    z tendrem, np. Ty2 = 60. Dla tendrzaków, LOK i ZT wpisujemy 0).
+12) Dlugosc_m     - Długość całkowita pojazdu ze zderzakami w metrach [m].
+13) L_osi         - Całkowita liczba wszystkich osi w pojeździe (np. 4, 6, 12).
+14) N_napednych   - Liczba osi napędnych w pojeździe (np. 4 dla EU07, 4 dla EN57,
+                    5 dla parowozu Ty2 o układzie osi 1'E).
+15) Vmax_kmh      - Maksymalna prędkość konstrukcyjna pojazdu w [km/h].
+16) PsiA          - Opcjonalny własny współczynnik przyczepności przy rozruchu
+                    (np. 0.48 dla nowoczesnych lokomotyw jak Gama/Vectron).
+                    Zostawienie pustego pola włącza standardowy wzór PKP (0.33).
+17) Rodzina_TW    - OPCJONALNA kolumna (nie trzeba jej dopisywać w starych
+                    wierszach!). Wpisujemy tu wspólny kod rodziny sprzęgu
+                    i sterowania wielokrotnego (np. PESA_SA, PAFAWAG_OPOR).
+
+
+3. JAK DZIAŁA KOLUMNA 17 (Rodzina_TW) I ŁĄCZENIE POJAZDÓW?
+--------------------------------------------------------------------------------
+- Identyczna seria (np. ST44 + ST44 albo EN57 + EN57) zawsze może połączyć się
+  w "Trakcję wielokrotną" (100% siły pociągowej), nawet jeśli kolumna 17 jest
+  pusta.
+- Jeśli dopisujesz różne serie zespołów trakcyjnych tego samego producenta,
+  które w rzeczywistości można spiąć razem w trakcję wielokrotną (np. SA133,
+  SA136 i SA138), wpisz na końcu ich wierszy ten sam kod rodziny (np. PESA_SA).
+- Parowozy (Typ = LOK, Opory = P) nigdy nie mają opcji "Trakcja wielokrotna"
+  (mogą pracować wyłącznie jako Doprzęg lub Popychacz z 90% siły).
+- Zespoły trakcyjne (Typ = ZT) nigdy nie mogą pracować jako Doprzęg ani
+  Popychacz — łączą się wyłącznie w Trakcję wielokrotną (100% siły).
+
+
+4. PRZYKŁADY POPRAWNYCH WPISÓW W PLIKU tabor.txt
+--------------------------------------------------------------------------------
+# 1. Klasyczna lokomotywa spalinowa (6 osi, wszystkie napędne):
+ST44;LOK;S;N;;1472;;;116.5;116.5;0;18;6;6;100;
+
+# 2. Lokomotywa elektryczna 3 kV DC:
+EU07;LOK;E;N;;;2000;;83.0;83.0;0;16;4;4;125;
+
+# 3. Lokomotywa hybrydowa (spalinowa 400 kW + elektryczna 5600 kW, PsiA = 0.48):
+111Ed Gama;LOK;E;T;;400;5600;;84.0;84.0;0;20;4;4;160;0.48
+
+# 4. Parowóz towarowy z tendrem 60 t (układ osi 1'E -> 6 osi razem, 5 napędnych):
+Ty2;LOK;P;P;1200;;;;86.1;86.1;60;23;6;5;80;
+
+# 5. Zespoły trakcyjne różnych serii spięte we wspólną rodzinę PESA_SA:
+SA133;ZT;Nowoczesne;N;;780;;;78.0;92.0;0;42;8;4;120;;PESA_SA
+SA136;ZT;Nowoczesne;N;;1120;;;108.0;132.0;0;58;10;4;120;;PESA_SA
+SA138;ZT;Nowoczesne;N;;1120;;;112.0;138.0;0;59;10;4;120;;PESA_SA
+
+
+5. NAJCZĘSTSZE BŁĘDY PRZY DOPISYWANIU NOWEGO TABORU
+--------------------------------------------------------------------------------
+- Zbyt mała liczba średników w wierszu (każdy wiersz musi mieć minimum 15
+  średników, inaczej program pominie dany pojazd przy wczytywaniu).
+- Pomylenie kolejności mas: Masa_Prozny_t musi być zawsze mniejsza lub równa
+  Masa_Ladowny_t.
+- Wpisanie dla ZT liczby osi napędnych równej liczbie wszystkich osi (np. w EN57
+  tylko środkowy człon ma silniki, więc wpisujemy L_osi = 12, N_napednych = 4).
+- Brak kliknięcia przycisku "Odśwież tabor/przewoźnicy (.txt)" po zapisaniu
+  zmian w otwartym programie.
+================================================================================

@@ -1,0 +1,4 @@
+﻿# Punkt;Km;Vmax_kmh;Pochylenie_promile;Postoj;Kod
+KOŚCIERZYNA;69.322;80;9.1;TAK;BRAK
+LIPUSZ;52.61;80;9.1;TAK;BRAK
+

@@ -1,0 +1,132 @@
+================================================================================
+  INSTRUKCJA TWORZENIA I EDYCJI TRAS W PROGRAMIE OTSKPZ1989
+  (Obliczenia Trakcyjne PKP / SKPZ do 1989 r.)
+================================================================================
+
+1. STRUKTURA PLIKU TRASY (.txt)
+--------------------------------------------------------------------------------
+Każda trasa jest zwykłym plikiem tekstowym (kodowanie UTF-8), w którym wiersze
+opisują kolejne punkty trasy od stacji początkowej do stacji końcowej.
+Wiersze zaczynające się od znaku # są komentarzami (program je pomija).
+
+Poszczególne kolumny oddziela się średnikiem (;) w następującej kolejności:
+Punkt;Km;Vmax_kmh;Pochylenie_promile;Postoj;Kod
+
+Opis poszczególnych kolumn:
+1) Punkt              - Nazwa stacji (ST), posterunku (POGP), przystanku lub
+                        punktu ograniczenia prędkości.
+2) Km                 - Kilometraż punktu w kilometrach (np. 33.472 lub 33,472).
+                        Przy przejściu na inną linię kolejową można wpisać
+                        kilometraż łamany: KmWjazdu/KmWyjazdu (np. 137.322/69.320).
+3) Vmax_kmh           - Prędkość drogowa maksymalna [km/h] obowiązująca na
+                        odcinku prowadzącym DO TEGO punktu (od punktu poprzedniego).
+4) Pochylenie_promile - Miarodajne pochylenie profilu [‰] na odcinku DO TEGO
+                        punktu. Wartość dodatnia (+) oznacza wzniesienie,
+                        ujemna (-) spadek. W pierwszym wierszu zostawiamy puste.
+5) Postoj             - Zatrzymanie pociągu w tym punkcie: TAK lub NIE.
+                        (Pierwszy i ostatni punkt trasy muszą mieć TAK).
+6) Kod                - Kod specjalny na odcinku: BRAK, ZMIANA_LINII,
+                        PRZ_CZOLO lub TKM.
+
+
+2. ZŁOTA ZASADA DZIAŁANIA PROGRAMU (JAK LICZONE SĄ ODCINKI)
+--------------------------------------------------------------------------------
+BARDZO WAŻNE:
+Parametry wpisane w danym wierszu (Vmax_kmh oraz Pochylenie_promile) dotyczą
+zawsze odcinka szlaku POPRZEDZAJĄCEGO ten punkt (czyli od wiersza wyżej
+do wiersza bieżącego).
+
+Przykład:
+Wiersz 1: Stacja A;10.000;80;;TAK;BRAK
+Wiersz 2: Stacja B;20.000;100;4.5;NIE;BRAK
+
+Oznacza to, że na odcinku od km 10.000 (Stacja A) do km 20.000 (Stacja B)
+obowiązuje prędkość drogowa 100 km/h oraz wzniesienie 4,5 promila.
+
+
+3. JAK POPRAWNIE WPROWADZIĆ OGRANICZENIE PRĘDKOŚCI (np. V = 30 km/h)
+--------------------------------------------------------------------------------
+Aby wprowadzić ograniczenie prędkości (np. z powodu robót torowych lub stanu
+toru) od km 40.000 do km 40.050 na szlaku o prędkości 80 km/h, należy dodać
+DWA dodatkowe wiersze w miejscu ograniczenia:
+
+- Wiersz A (Początek ograniczenia): wpisujemy kilometraż początku zwolnienia
+  (40.000), a jako prędkość wpisujemy prędkość szlakową DO TEGO miejsca (80).
+- Wiersz B (Koniec ograniczenia): wpisujemy kilometraż końca zwolnienia
+  (40.050), a jako prędkość wpisujemy wartość ograniczenia (30).
+- Wiersz C (Następna stacja): wpisujemy kilometraż stacji i przywracamy
+  prędkość szlakową (80).
+
+Poprawny zapis w pliku .txt:
+Maksymilianowo (ST);33.472;80;6.1;NIE;BRAK
+Początek ograniczenia;40.000;80;;NIE;BRAK
+Koniec ograniczenia 30 km/h;40.050;30;;NIE;BRAK
+Serock (ST);50.306;80;4.6;NIE;BRAK
+
+Jak zachowa się pociąg w symulacji:
+1. Na odcinku 33.472 -> 40.000 jedzie 80 km/h i odpowiednio wcześniej zaczyna
+   hamowanie służbowe (zgodnie z opóźnieniem ah z instrukcji R-11), aby
+   w punkcie 40.000 mieć dokładnie 30 km/h.
+2. Na odcinku 40.000 -> 40.050 utrzymuje prędkość 30 km/h.
+3. Program automatycznie "zaciąga" ograniczenie 30 km/h na całą długość
+   pociągu (lokomotywy + wagony) za punktem 40.050, więc czoło pociągu
+   zacznie przyspieszać do 80 km/h dopiero wtedy, gdy ostatni wagon minie
+   km 40.050.
+4. Puste pola pochylenia (;;) w wierszach ograniczenia program automatycznie
+   uzupełnia profilem z następnego punktu (tu: 4,6 promila z Serocka).
+
+
+4. KILKA OGRANICZEŃ PRĘDKOŚCI POD RZĄD (SCHODKOWANIE)
+--------------------------------------------------------------------------------
+Jeżeli na jednym szlaku występują dwa ograniczenia obok siebie (np. najpierw
+50 km/h od km 12.000 do 12.500, a potem 20 km/h od km 12.500 do 12.800):
+
+Stacja Start;10.000;80;;TAK;BRAK
+Początek ogr. 50;12.000;80;;NIE;BRAK
+Koniec ogr. 50 / Początek 20;12.500;50;;NIE;BRAK
+Koniec ogr. 20;12.800;20;;NIE;BRAK
+Stacja Koniec;18.000;80;2.0;TAK;BRAK
+
+
+5. PRZEJŚCIE NA INNĄ LINIĘ KOLEJOWĄ (KILOMETRAŻ ŁAMANY)
+--------------------------------------------------------------------------------
+Gdy pociąg na stacji węzłowej przechodzi z jednej linii na drugą (gdzie
+zmienia się kilometraż), w kolumnie Km wpisujemy: KmWjazdu/KmWyjazdu,
+a w kolumnie Kod wpisujemy ZMIANA_LINII.
+
+Przykład (przejście z linii 201 na linię 211 w Kościerzynie bez postoju):
+Bąk (ST);116.699;80;4.1;NIE;BRAK
+Kościerzyna (ST - zmiana linii 201/211);137.322/69.320;80;5.1;NIE;ZMIANA_LINII
+Lipusz (ST - linia 211);52.612;80;9.1;TAK;BRAK
+
+Program automatycznie:
+- Obliczy dystans od Bąka do Kościerzyny: |137.322 - 116.699| = 20.623 km.
+- Ograniczy prędkość przejazdu przez rozjazdy w Kościerzynie do 40 km/h
+  na całej długości składu (jeśli Postoj = NIE).
+- Obliczy dystans od Kościerzyny do Lipusza na linii 211:
+
+  |52.612 - 69.320| = 16.708 km (obsługuje również kilometraż malejący!).
+
+
+6. ZNACZENIE KODÓW SPECJALNYCH (KOLUMNA 6)
+--------------------------------------------------------------------------------
+- BRAK         : Standardowa jazda szlakowa.
+- ZMIANA_LINII/TORU : Przejazd przez stację węzłową na inną linię (ograniczenie
+                 do 40 km/h na rozjazdach, gdy pociąg jedzie bez postoju).
+- PRZ_CZOLO    : aplikacja pomija zaciąganie ograniczenia prędkości  na długość całego składu
+- TKM - Próba hamulców w biegu (wykonywana na wskazanym odcinku wyłącznie po ruszeniu ze stacji z Postoj = TAK; przy przelocie = NIE kod jest pomijany):
+      * gdy V drog. >= 60 km/h: pociąg rozpędza się do 60 km/h, hamuje do 30 km/h, a następnie przyspiesza do pełnej prędkości drogowej;
+      * gdy V drog. < 60 km/h (lub gdy ze względu na brutto i profil linii pociąg nie zdąży osiągnąć 60 km/h na tym odcinku): pociąg rozpędza się do maksymalnej prędkości osiągalnej na tym szlaku, hamuje do połowy tej prędkości, a następnie ponownie przyspiesza;
+      * odcinek, na którym wykonano próbę, jest oznaczany w wynikach dopiskiem [TKM].
+TKM_ZMIANA_LINII/TORU – kod łączony stosowany w punkcie zmiany linii lub toru (przejazd przez rozjazdy w kierunku zwrotnym), na którym dodatkowo zaplanowano wykonanie próby hamulców w biegu. Jeśli pociąg nie ma postoju w tym punkcie, program ogranicza prędkość do 40 km/h na długości przejazdu całego składu przez rozjazdy (od 50 m przed punktem do 50 m po zjeździe ostatniego wagonu). Dodatkowo, jeśli pociąg ruszał z postoju w punkcie poprzedzającym, na tym odcinku symulowane jest hamowanie próbne 
+
+
+7. NAJCZĘSTSZE BŁĘDY PRZY TWORZENIU TRASY
+--------------------------------------------------------------------------------
+- Brak średnika (;) lub użycie spacji/tabulatora zamiast średnika (każdy
+  wiersz musi mieć dokładnie 5 średników, czyli 6 kolumn).
+- Wpisanie ograniczenia prędkości w wierszu "Początek ograniczenia" zamiast
+  w wierszu "Koniec ograniczenia" (wtedy pociąg zwolni za wcześnie - już na
+  poprzednim szlaku!).
+- Ustawienie Postoj = NIE w pierwszym lub ostatnim wierszu trasy.
+================================================================================
