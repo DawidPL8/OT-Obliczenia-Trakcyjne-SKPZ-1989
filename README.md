@@ -10,7 +10,7 @@ OT Traction Calculations SKPZ 1989 – calculating train running times across th
 ## English – Rolling Stock File Format & Rules
 
 The rolling stock database is stored as a semicolon-separated (`;`) text/CSV file. Each line represents a single traction vehicle.
-
+<img width="1917" height="1020" alt="Zrzut ekranu 2026-11-16 081549" src="https://github.com/user-attachments/assets/bae847ba-0bb7-478b-a97d-e635d2e2b896" />
 ### File Structure (Columns)
 `Seria;Typ(LOK/ZT);Opory(E/S/P/Klasyczne/Nowoczesne/HS/HS+);STA(T/N/P);P_Parowa;P_Spalinowa;P_3kV;P_25kV;Masa_Prozny_t;Masa_Ladowny_t;Tender_t;Dlugosc_m;L_osi;N_napednych;Vmax_kmh;PsiA`
 
