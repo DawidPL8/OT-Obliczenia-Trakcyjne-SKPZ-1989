@@ -1,9 +1,13 @@
-# OTObliczeniaTrakcyjneSKPZ1989
-OT Traction Calculations SKPZ 1989 – calculating train running times across the Polish PKP network using 1989 rolling stock, with support for adding modern traction vehicles. / OT Obliczenia Trakcyjne SKPZ 1989 obliczanie czasu jazdy pociagów na terenie Polski PKP z taborem z 1989 roku + możliwość dodania współczesnych pojazdów trakcyjnych.
-# OTObliczeniaTrakcyjneSKPZ1989
+# OT Obliczenia Trakcyjne SKPZ 1989 – Aplikacja do obliczeń trakcyjnych i symulacji czasu jazdy pociągów (PKP)
 
-**EN:** OT Traction Calculations SKPZ 1989 – a tool for calculating train running times across the Polish PKP railway network using historical 1989 rolling stock, with support for adding modern traction vehicles.  
-**PL:** OT Obliczenia Trakcyjne SKPZ 1989 – program do obliczania czasu jazdy pociągów na sieci kolejowej PKP z wykorzystaniem historycznego taboru z 1989 roku oraz możliwością dodawania współczesnych pojazdów trakcyjnych.
+**PL:** **OT Obliczenia Trakcyjne SKPZ 1989** to darmowa aplikacja desktopowa (Windows / C#) do wykonywania obliczeń trakcyjnych oraz symulacji czasu jazdy pociągów na sieci kolejowej PKP. Program wykorzystuje historyczną bazę taboru z 1989 roku oraz pozwala na łatwe dodawanie własnych tras i współczesnych pojazdów trakcyjnych (w tym z napędem asynchronicznym).
+
+**EN:** **OT Traction Calculations SKPZ 1989** – a free Windows desktop application for railway traction calculations and train running time simulations across the Polish PKP network using 1989 rolling stock, with support for adding custom routes and modern traction vehicles.
+
+## Pobieranie i uruchomienie / Download & How to Run
+* **Gotowy program (Windows):** Pobierz najnowszą paczkę `.zip` z zakładki **[Releases](../../releases)**, rozpakuj wszystkie pliki do jednego folderu i uruchom `OTSKPZ1989.exe`.
+* **Ready-to-run app (Windows):** Download the latest `.zip` archive from **[Releases](../../releases)**, extract all files into one folder, and run `OTSKPZ1989.exe`.
+
 
 ---
 
